@@ -10,9 +10,14 @@
     "db:setup": "wrangler d1 migrations apply htfluo-db --local && pnpm run db:seed",
     "check": "wrangler deploy --dry-run",
     "test:smoke": "node ./scripts/smoke-test.mjs",
-    "audit:seo": "node ./scripts/seo-audit.mjs"
+    "audit:seo": "node ./scripts/seo-audit.mjs",
+    "build": "wrangler deploy --dry-run"
   },
   "devDependencies": {
     "wrangler": "^4.30.0"
+  },
+  "packageManager": "pnpm@11.16.0",
+  "engines": {
+    "node": ">=22.0.0"
   }
 }
