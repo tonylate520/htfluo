@@ -2,7 +2,9 @@ const marketSelect = document.querySelector('#market-select');
 const productSelect = document.querySelector('#product-select');
 const results = document.querySelector('#results');
 
-document.querySelector('#cost-form h3').insertAdjacentHTML('afterend', '<label>Destination market<select id="cost-market"><option value="eu">European Union</option><option value="us">United States</option><option value="uk">United Kingdom</option></select></label><label>HS code prefix<input id="hs-prefix" inputmode="numeric" maxlength="2" placeholder="85" /></label>');
+if (!document.querySelector('#cost-market')) {
+  document.querySelector('#cost-form .tool-header').insertAdjacentHTML('afterend', '<div class="form-grid-2"><label>Destination Market<select id="cost-market"><option value="eu">European Union</option><option value="us">United States</option><option value="uk">United Kingdom</option></select></label><label>HS Code Prefix<input id="hs-prefix" inputmode="numeric" maxlength="2" placeholder="85" value="85" /></label></div>');
+}
 
 const escapeHtml = (value = '') => String(value).replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
 
