@@ -1,0 +1,39 @@
+name = "htfluo-market-access"
+main = "src/worker.js"
+compatibility_date = "2026-08-15"
+workers_dev = true
+preview_urls = false
+routes = [
+  { pattern = "htfluo.com/*", zone_name = "htfluo.com" },
+  { pattern = "www.htfluo.com/*", zone_name = "htfluo.com" }
+]
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+run_worker_first = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "htfluo-db"
+database_id = "e4b67ca7-86ad-4fa3-b9a8-44a46feb26f2"
+migrations_dir = "db/migrations"
+
+[triggers]
+crons = ["0 3 * * *"]
+
+[[queues.producers]]
+binding = "UPDATE_QUEUE"
+queue = "htfluo-regulatory-updates"
+
+[[queues.consumers]]
+queue = "htfluo-regulatory-updates"
+max_batch_size = 10
+max_batch_timeout = 5
+
+[observability]
+enabled = true
+
+[vars]
+MAIL_FROM = "HT Fluo <updates@htfluo.com>"
+TURNSTILE_SITE_KEY = "0x4AAAAAAEQsvJoemw6v_mHi"

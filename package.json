@@ -1,0 +1,18 @@
+{
+  "name": "ht-fluo-market-access",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:migrate": "wrangler d1 migrations apply htfluo-db --local",
+    "db:seed": "wrangler d1 execute htfluo-db --local --file=./db/seed.sql && wrangler d1 execute htfluo-db --local --file=./db/production_seed.sql && wrangler d1 execute htfluo-db --local --file=./db/article_seed.sql && wrangler d1 execute htfluo-db --local --file=./db/operations_seed.sql && wrangler d1 execute htfluo-db --local --file=./db/migrations/0007_deepen_editorial_content.sql && wrangler d1 execute htfluo-db --local --file=./db/migrations/0008_deepen_cornerstone_briefings.sql && wrangler d1 execute htfluo-db --local --file=./db/migrations/0009_add_operational_briefings.sql && wrangler d1 execute htfluo-db --local --file=./db/migrations/0010_refine_briefing_titles.sql && wrangler d1 execute htfluo-db --local --file=./db/migrations/0011_add_evidence_workflow_briefings.sql && wrangler d1 execute htfluo-db --local --file=./db/migrations/0012_add_trade_and_change_briefings.sql && wrangler d1 execute htfluo-db --local --file=./db/migrations/0013_refresh_legacy_briefings.sql && wrangler d1 execute htfluo-db --local --file=./db/migrations/0014_expand_longtail_briefings.sql",
+    "db:setup": "wrangler d1 migrations apply htfluo-db --local && pnpm run db:seed",
+    "check": "wrangler deploy --dry-run",
+    "test:smoke": "node ./scripts/smoke-test.mjs",
+    "audit:seo": "node ./scripts/seo-audit.mjs"
+  },
+  "devDependencies": {
+    "wrangler": "^4.30.0"
+  }
+}
